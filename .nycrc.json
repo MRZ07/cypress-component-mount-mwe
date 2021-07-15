@@ -1,0 +1,10 @@
+{
+    "extends": "@istanbuljs/nyc-config-typescript",
+    "require": "@babel/register",
+    "report-dir": "tests/coverage/component",
+    "reporter": ["lcov", "cobertura"],
+    "all": true,
+    "cache": false,
+    "include": ["src"],
+    "extension": [".js", ".ts", ".vue"]
+}
