@@ -1,21 +1,23 @@
-import {mount} from '@cypress/vue';
 import '@cypress/vue/dist/support';
+import {shallowMount} from '@vue/test-utils';
 import Counter from '../../../src/pages/Counter.vue';
 
 describe('Tests', () => {
     it('Counter should show initial value passed as route parameter', () => {
+
         const initialCounterValue = 17;
 
-        mount(Counter, {
+        const $route = {
+            path: '/17',
+            params: {initialCounter: initialCounterValue},
+        };
+
+        const wrapper = shallowMount(Counter, {
             mocks: {
-                $route: {
-                    params: {
-                        initialCounter: initialCounterValue,
-                    },
-                },
+                $route,
             },
         });
 
-        cy.contains(initialCounterValue).should('be.visible');
+        expect(wrapper.vm.$data.counter).eq(initialCounterValue);
     });
 });
